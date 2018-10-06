@@ -4,7 +4,7 @@
 from setuptools import find_packages
 from distutils.core import setup
 
-version = "0.0.2"
+version = "0.1.0"
 
 with open('README.rst') as f:
     long_description = f.read()
@@ -19,7 +19,7 @@ setup(name='ofxstatement-be-kbc',
       license="GPLv3",
       keywords=["ofx", "banking", "statement", "kbc", "csv"],
       classifiers=[
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 5 - Production/Stable',
           'Programming Language :: Python :: 3',
           'Natural Language :: English',
           'Topic :: Office/Business :: Financial :: Accounting',

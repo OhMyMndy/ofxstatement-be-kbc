@@ -4,9 +4,9 @@ from ofxstatement.statement import StatementLine
 from ofxstatement.exceptions import ParseError
 import csv
 
-
 LINELENGTH = 18
 HEADER_START = "Rekeningnummer"
+
 
 class KbcBePlugin(Plugin):
     """Belgian KBC Bank plugin for ofxstatement
@@ -19,15 +19,14 @@ class KbcBePlugin(Plugin):
 
 
 class KbcBeParser(CsvStatementParser):
-
     date_format = "%d/%m/%Y"
 
     mappings = {
         'memo': 6,
         'date': 5,
         'amount': 8,
-        'check_no' : 4,
-        'refnum' : 4
+        'check_no': 4,
+        'refnum': 4
 
     }
 
@@ -36,7 +35,7 @@ class KbcBeParser(CsvStatementParser):
     def parse_float(self, value):
         """Return a float from a string with ',' as decimal mark.
         """
-        return float(value.replace(',','.'))
+        return float(value.replace(',', '.'))
 
     def split_records(self):
         """Return iterable object consisting of a line per transaction
@@ -74,7 +73,6 @@ class KbcBeParser(CsvStatementParser):
                                  'started with ' + self.statement.currency)
         else:
             self.statement.currency = line[3]
-
 
         stmt_ln = super(KbcBeParser, self).parse_record(line)
 

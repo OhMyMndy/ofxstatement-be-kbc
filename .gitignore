@@ -7,6 +7,8 @@ tags
 build
 eggs
 .venv
+venv
+.idea
 .project
 .pydevproject
 *.sublime*
