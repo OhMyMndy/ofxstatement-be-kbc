@@ -16,6 +16,53 @@ your own plugin.
 
 .. _ofxstatement: https://github.com/kedder/ofxstatement
 
+Installation
+============
+Either:
+
+#. Download from `pypi <https://pypi.org/project/ofxstatement-be-kbc>`_ and run
+   :code:`$ python setup.py install`
+#. Install using pip: :code:`$ pip install ofxstatement-be-kbc`
+#. Arch linux users can install `AUR package ofxstatement-be-kbc
+   <https://aur.archlinux.org/packages/ofxstatement-be-kbc/>`_
+
 Usage
 =====
-  $ ofxstatement convert -t kbcbe input.csv output.ofx
+Basically: :code:`$ ofxstatement convert -t kbcbe input.csv output.ofx`
+
+General usage of ofxstatement:
+
+.. code-block::
+
+   $ ofxstatement --help
+   usage: ofxstatement [-h] [--version] [-d]
+                    {convert,list-plugins,edit-config} ...
+
+   Tool to convert proprietary bank statement to OFX format.
+
+   optional arguments:
+     -h, --help            show this help message and exit
+     --version             show current version
+     -d, --debug           show debugging information
+
+   action:
+     {convert,list-plugins,edit-config}
+       convert             convert to OFX
+       list-plugins        list available plugins
+       edit-config         open configuration file in default editor
+
+Usage of the convert command:
+
+.. code-block::
+
+   $ ofxstatement convert --help
+   usage: ofxstatement convert [-h] -t TYPE input output
+
+   positional arguments:
+     input                 input file to process
+     output                output (OFX) file to produce
+
+   optional arguments:
+     -h, --help            show this help message and exit
+     -t TYPE, --type TYPE  input file type. This is a section in config file, or
+                           plugin name if you have no config file.
