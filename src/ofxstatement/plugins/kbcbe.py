@@ -26,6 +26,9 @@ class KbcBeParser(CsvStatementParser):
         'memo': 6,
         'date': 5,
         'amount': 8,
+        'check_no' : 4,
+        'refnum' : 4
+
     }
 
     line_nr = 0
