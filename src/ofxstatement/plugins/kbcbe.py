@@ -1,6 +1,5 @@
 from ofxstatement.plugin import Plugin
 from ofxstatement.parser import CsvStatementParser
-from ofxstatement.statement import StatementLine
 from ofxstatement.exceptions import ParseError
 import csv
 
@@ -27,15 +26,9 @@ class KbcBeParser(CsvStatementParser):
         'amount': 8,
         'check_no': 4,
         'refnum': 4
-
     }
 
     line_nr = 0
-
-    def parse_float(self, value):
-        """Return a float from a string with ',' as decimal mark.
-        """
-        return float(value.replace(',', '.'))
 
     def split_records(self):
         """Return iterable object consisting of a line per transaction
@@ -73,6 +66,19 @@ class KbcBeParser(CsvStatementParser):
                                  'started with ' + self.statement.currency)
         else:
             self.statement.currency = line[3]
+
+        # Get reconciliation data. First line is the most recent transaction
+        # and contains the end balance. Last line is the oldest transaction and
+        # contains the start balance plus or minus the oldest transaction
+        # amount. Not perfect since we need to calculate, but still valuable.
+        if self.line_nr == 2:  # First line with data is line nr 2 :-)
+            # Store end balance
+            self.statement.end_balance = self.parse_float(line[9])
+        else:
+            # Calculate start balance & store start balance,
+            # will overwrite every time, last line survives.
+            self.statement.start_balance = self.parse_float(line[9]) - \
+                                           self.parse_float(line[8])
 
         stmt_ln = super(KbcBeParser, self).parse_record(line)
 
